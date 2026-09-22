@@ -288,27 +288,7 @@ a { color: var(--primary-dark); }
 .contact-list a { font-size: 1.05rem; text-decoration: none; }
 .contact-list a:hover { text-decoration: underline; }
 
-.map-embed { margin-top: 1.5rem; border-radius: var(--radius); overflow: hidden; }
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  background: var(--bg-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px;
-}
-.contact-form label { font-size: 0.9rem; font-weight: 600; }
-.contact-form input,
-.contact-form textarea {
-  padding: 10px 12px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  font: inherit;
-}
-.contact-form .btn { align-self: flex-start; margin-top: 8px; }
-.hidden-field { display: none; }
+.map-embed { border-radius: var(--radius); overflow: hidden; }
 
 /* Footer */
 .site-footer {
