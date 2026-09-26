@@ -220,12 +220,14 @@ a { color: var(--primary-dark); }
   visibility: visible;
   pointer-events: auto;
 }
-/* Lock page scroll while a lightbox/modal is open — avoids the well-known iOS Safari
+/* Lock page scroll while a lightbox/modal is open — avoids the well-known iOS WebKit
    glitch where fixed-position overlays can desync from the viewport during momentum
-   scrolling, since with scrolling locked there's nothing to desync from. */
-body:has(.gallery-toggle:checked),
-body:has(.modal-toggle:checked) {
+   scrolling, since with scrolling locked there's nothing to desync from. Toggled by
+   JS (see bottom script) rather than :has() alone, for broader browser support. */
+html.scroll-locked,
+html.scroll-locked body {
   overflow: hidden;
+  height: 100%;
 }
 .lightbox-backdrop { position: absolute; inset: 0; cursor: zoom-out; }
 .lightbox-photo {

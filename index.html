@@ -414,6 +414,24 @@ document.querySelectorAll('.gallery-wrapper').forEach(function (wrapper) {
     track.scrollBy({ left: step, behavior: 'smooth' });
   });
 });
+
+// Lock background scroll while a lightbox/modal is open. Relying on CSS :has() alone
+// wasn't enough on some mobile browsers, so this directly blocks the touch-drag
+// gesture that scrolls the page (the same gesture that could desync a fixed-position
+// overlay on iOS WebKit).
+var modalToggles = document.querySelectorAll('.gallery-toggle, .modal-toggle');
+function anyModalOpen() {
+  return Array.prototype.some.call(modalToggles, function (cb) { return cb.checked; });
+}
+function syncScrollLock() {
+  document.documentElement.classList.toggle('scroll-locked', anyModalOpen());
+}
+modalToggles.forEach(function (cb) {
+  cb.addEventListener('change', syncScrollLock);
+});
+document.addEventListener('touchmove', function (e) {
+  if (anyModalOpen()) e.preventDefault();
+}, { passive: false });
 </script>
 
 </body>
