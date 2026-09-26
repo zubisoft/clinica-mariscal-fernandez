@@ -207,7 +207,7 @@ a { color: var(--primary-dark); }
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background: rgba(0, 0, 0, 0.85);
+  background: #000;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
