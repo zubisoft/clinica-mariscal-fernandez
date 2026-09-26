@@ -401,11 +401,13 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 document.querySelectorAll('.gallery-wrapper').forEach(function (wrapper) {
   var track = wrapper.querySelector('.gallery-grid');
+  var items = track.querySelectorAll('.gallery-item');
+  var step = items.length > 1 ? (items[1].offsetLeft - items[0].offsetLeft) : track.clientWidth;
   wrapper.querySelector('.gallery-arrow-prev').addEventListener('click', function () {
-    track.scrollBy({ left: -220, behavior: 'smooth' });
+    track.scrollBy({ left: -step, behavior: 'smooth' });
   });
   wrapper.querySelector('.gallery-arrow-next').addEventListener('click', function () {
-    track.scrollBy({ left: 220, behavior: 'smooth' });
+    track.scrollBy({ left: step, behavior: 'smooth' });
   });
 });
 </script>
