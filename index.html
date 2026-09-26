@@ -93,7 +93,6 @@
     </div>
 
     <dialog class="photo-dialog" id="photo-dialog">
-      <button type="button" class="lightbox-close" aria-label="Cerrar">&times;</button>
       <img id="photo-dialog-img" src="" alt="">
     </dialog>
   </div>
@@ -416,9 +415,6 @@ document.querySelectorAll('.gallery-item .thumb').forEach(function (btn) {
 });
 photoDialog.addEventListener('click', function (e) {
   if (e.target === photoDialog || e.target === photoDialogImg) photoDialog.close();
-});
-photoDialog.querySelector('.lightbox-close').addEventListener('click', function () {
-  photoDialog.close();
 });
 
 // Legal/cookies modal: same native <dialog> approach.

@@ -206,13 +206,21 @@ a { color: var(--primary-dark); }
    overlay, so none of that mechanism's mobile quirks apply. */
 .photo-dialog {
   position: fixed;
-  margin: auto;
+  inset: 0;
+  margin: 0;
   border: none;
   padding: 24px;
   background: #000;
   border-radius: 0;
+  width: 100%;
+  height: 100%;
   max-width: 100vw;
   max-height: 100vh;
+}
+.photo-dialog[open] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .photo-dialog::backdrop { background: #000; }
 .photo-dialog img {
@@ -223,25 +231,6 @@ a { color: var(--primary-dark); }
   border-radius: 8px;
   cursor: zoom-out;
 }
-.lightbox-close {
-  position: fixed;
-  top: 16px;
-  right: max(16px, calc(50vw - 460px));
-  z-index: 2;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.15);
-  color: #fff;
-  font-size: 1.8rem;
-  line-height: 1;
-  border-radius: 50%;
-  border: none;
-  cursor: pointer;
-}
-.lightbox-close:hover { background: rgba(255, 255, 255, 0.3); }
 
 .team-grid {
   display: grid;
