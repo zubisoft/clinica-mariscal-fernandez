@@ -69,28 +69,12 @@
       <button type="button" class="gallery-arrow gallery-arrow-prev" aria-label="Anterior">&#8249;</button>
       <div class="gallery-grid">
       <figure class="gallery-item">
-        <input type="checkbox" id="gal-1" class="gallery-toggle">
-        <label for="gal-1" class="thumb"><img src="images/portada-3.jpg" alt="Gabinete Verde"></label>
+        <button type="button" class="thumb" data-full="images/portada-3.jpg" data-alt="Gabinete Verde"><img src="images/portada-3.jpg" alt="Gabinete Verde"></button>
         <figcaption>Gabinete Verde</figcaption>
-        <div class="lightbox">
-          <label for="gal-1" class="lightbox-backdrop" aria-label="Cerrar"></label>
-          <label for="gal-1" class="lightbox-photo" aria-label="Cerrar">
-            <img src="images/portada-3.jpg" alt="Gabinete Verde">
-          </label>
-          <label for="gal-1" class="lightbox-close" aria-label="Cerrar">&times;</label>
-        </div>
       </figure>
       <figure class="gallery-item">
-        <input type="checkbox" id="gal-2" class="gallery-toggle">
-        <label for="gal-2" class="thumb"><img src="images/portada-4.jpg" alt="Gabinete Azul"></label>
+        <button type="button" class="thumb" data-full="images/portada-4.jpg" data-alt="Gabinete Azul"><img src="images/portada-4.jpg" alt="Gabinete Azul"></button>
         <figcaption>Gabinete Azul</figcaption>
-        <div class="lightbox">
-          <label for="gal-2" class="lightbox-backdrop" aria-label="Cerrar"></label>
-          <label for="gal-2" class="lightbox-photo" aria-label="Cerrar">
-            <img src="images/portada-4.jpg" alt="Gabinete Azul">
-          </label>
-          <label for="gal-2" class="lightbox-close" aria-label="Cerrar">&times;</label>
-        </div>
       </figure>
       <figure class="gallery-item">
         <div class="gallery-placeholder"><span>Foto pendiente</span></div>
@@ -107,6 +91,11 @@
       </div>
       <button type="button" class="gallery-arrow gallery-arrow-next" aria-label="Siguiente">&#8250;</button>
     </div>
+
+    <dialog class="photo-dialog" id="photo-dialog">
+      <button type="button" class="lightbox-close" aria-label="Cerrar">&times;</button>
+      <img id="photo-dialog-img" src="" alt="">
+    </dialog>
   </div>
 </section>
 
@@ -366,15 +355,13 @@
 <footer class="site-footer">
   <div class="container">
     <p>&copy; <span id="year"></span> Clínica Dental Doctora Mariscal Fernández · Estepona, Málaga</p>
-    <label for="legal-modal" class="footer-legal-link">Aviso legal y cookies</label>
+    <button type="button" class="footer-legal-link" id="legal-modal-open">Aviso legal y cookies</button>
   </div>
 </footer>
 
-<input type="checkbox" id="legal-modal" class="modal-toggle">
-<div class="modal">
-  <label for="legal-modal" class="modal-backdrop" aria-label="Cerrar"></label>
+<dialog class="modal" id="legal-modal">
   <div class="modal-content">
-    <label for="legal-modal" class="modal-close" aria-label="Cerrar">&times;</label>
+    <button type="button" class="modal-close" id="legal-modal-close" aria-label="Cerrar">&times;</button>
     <h2>Aviso legal y protección de datos</h2>
     <div class="accordion">
       <details class="accordion-item">
@@ -398,7 +385,7 @@
       </details>
     </div>
   </div>
-</div>
+</dialog>
 
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
@@ -415,23 +402,36 @@ document.querySelectorAll('.gallery-wrapper').forEach(function (wrapper) {
   });
 });
 
-// Lock background scroll while a lightbox/modal is open. Relying on CSS :has() alone
-// wasn't enough on some mobile browsers, so this directly blocks the touch-drag
-// gesture that scrolls the page (the same gesture that could desync a fixed-position
-// overlay on iOS WebKit).
-var modalToggles = document.querySelectorAll('.gallery-toggle, .modal-toggle');
-function anyModalOpen() {
-  return Array.prototype.some.call(modalToggles, function (cb) { return cb.checked; });
-}
-function syncScrollLock() {
-  document.documentElement.classList.toggle('scroll-locked', anyModalOpen());
-}
-modalToggles.forEach(function (cb) {
-  cb.addEventListener('change', syncScrollLock);
+// Photo lightbox: native <dialog> instead of a hand-rolled position:fixed overlay.
+// The browser's own modal top-layer handles background scroll locking and avoids the
+// iOS WebKit bug where a page-authored fixed overlay can desync during momentum scroll.
+var photoDialog = document.getElementById('photo-dialog');
+var photoDialogImg = document.getElementById('photo-dialog-img');
+document.querySelectorAll('.gallery-item .thumb').forEach(function (btn) {
+  btn.addEventListener('click', function () {
+    photoDialogImg.src = btn.dataset.full;
+    photoDialogImg.alt = btn.dataset.alt || '';
+    photoDialog.showModal();
+  });
 });
-document.addEventListener('touchmove', function (e) {
-  if (anyModalOpen()) e.preventDefault();
-}, { passive: false });
+photoDialog.addEventListener('click', function (e) {
+  if (e.target === photoDialog || e.target === photoDialogImg) photoDialog.close();
+});
+photoDialog.querySelector('.lightbox-close').addEventListener('click', function () {
+  photoDialog.close();
+});
+
+// Legal/cookies modal: same native <dialog> approach.
+var legalDialog = document.getElementById('legal-modal');
+document.getElementById('legal-modal-open').addEventListener('click', function () {
+  legalDialog.showModal();
+});
+document.getElementById('legal-modal-close').addEventListener('click', function () {
+  legalDialog.close();
+});
+legalDialog.addEventListener('click', function (e) {
+  if (e.target === legalDialog) legalDialog.close();
+});
 </script>
 
 </body>
