@@ -219,9 +219,16 @@ a { color: var(--primary-dark); }
   pointer-events: auto;
 }
 .lightbox-backdrop { position: absolute; inset: 0; cursor: zoom-out; }
-.lightbox img {
+.lightbox-photo {
   position: relative;
   z-index: 1;
+  display: block;
+  cursor: zoom-out;
+  max-width: min(92vw, 900px);
+  max-height: 88vh;
+}
+.lightbox-photo img {
+  display: block;
   max-width: min(92vw, 900px);
   max-height: 88vh;
   object-fit: contain;
