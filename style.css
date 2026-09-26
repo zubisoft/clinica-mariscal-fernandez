@@ -38,24 +38,34 @@ a { color: var(--primary-dark); }
   border-bottom: 1px solid var(--border);
   z-index: 10;
 }
-.header-inner {
+.header-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 20px;
+  padding: 10px 20px 0;
   gap: 12px;
-  flex-wrap: wrap;
 }
 .logo img { height: 40px; display: block; }
-.main-nav { display: flex; gap: 18px; flex-wrap: wrap; align-items: center; }
+.main-nav {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 8px 20px 10px;
+}
 .main-nav a { text-decoration: none; color: var(--text); font-weight: 500; font-size: 0.95rem; }
 .main-nav a:hover { color: var(--primary-dark); }
 .nav-cta {
   background: var(--primary);
   color: #fff !important;
+  text-decoration: none;
   padding: 8px 16px;
   border-radius: 999px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-left: auto;
 }
+.nav-cta:hover { background: var(--primary-dark); }
 .social-icon {
   display: inline-flex;
   align-items: center;
@@ -102,30 +112,6 @@ a { color: var(--primary-dark); }
 .section { padding: 60px 0; }
 .section-alt { background: var(--bg-alt); }
 
-.two-col {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 40px;
-  align-items: start;
-}
-.info-card {
-  background: var(--bg-alt);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px 24px;
-}
-.schedule { list-style: none; padding: 0; margin: 0; }
-.schedule li {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--border);
-  font-size: 0.95rem;
-}
-.schedule li:last-child { border-bottom: none; }
-.schedule span:first-child { color: var(--muted); }
-
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -139,70 +125,125 @@ a { color: var(--primary-dark); }
 }
 .section-alt .card { background: #fff; }
 
+.gallery-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 .gallery-grid {
   display: flex;
-  gap: 6px;
-  height: 220px;
+  gap: 14px;
   overflow-x: auto;
-  border-radius: var(--radius);
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  flex: 1 1 auto;
+  padding-bottom: 2px;
 }
-.gallery-grid figure {
-  position: relative;
-  margin: 0;
-  flex: 1 1 0;
-  min-width: 60px;
-  overflow: hidden;
-  border-radius: 8px;
-}
-.gallery-grid input[type="radio"] { display: none; }
-.gallery-grid label {
-  display: block;
-  width: 100%;
-  height: 100%;
+.gallery-grid::-webkit-scrollbar { display: none; }
+.gallery-arrow {
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--text);
   cursor: pointer;
 }
-.gallery-grid img {
+.gallery-arrow:hover { background: var(--bg-alt); }
+.gallery-item { margin: 0; flex: 0 0 170px; scroll-snap-align: start; }
+.gallery-item .thumb,
+.gallery-placeholder {
+  display: block;
+  width: 100%;
+  height: 120px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.gallery-item .thumb { cursor: zoom-in; }
+.gallery-item .thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-.gallery-grid figcaption {
+.gallery-item figcaption {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+}
+.gallery-toggle { display: none; }
+
+.gallery-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: repeating-linear-gradient(135deg, #eef1f1, #eef1f1 10px, #e4e8e8 10px, #e4e8e8 20px);
+  border: 1px dashed var(--border);
+}
+.gallery-placeholder span {
+  font-size: 0.72rem;
+  color: var(--muted);
+  background: #fff;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+/* Click-to-expand lightbox (no JS): a hidden checkbox per photo toggles a fullscreen overlay.
+   Works identically on touch and pointer devices, unlike the old hover-driven row expansion. */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.85);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.gallery-toggle:checked ~ .lightbox {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.lightbox-backdrop { position: absolute; inset: 0; cursor: zoom-out; }
+.lightbox img {
+  position: relative;
+  z-index: 1;
+  max-width: min(92vw, 900px);
+  max-height: 88vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.lightbox-close {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 18px 10px 8px;
-  background: linear-gradient(0deg, rgba(0,0,0,0.65), rgba(0,0,0,0));
+  top: 16px;
+  right: max(16px, calc(50vw - 460px));
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.15);
   color: #fff;
-  font-size: 0.78rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  font-size: 1.8rem;
+  line-height: 1;
+  border-radius: 50%;
+  cursor: pointer;
 }
-
-/* Expand-on-hover only on devices that truly support hover (skip touch, where it would get "stuck" open) */
-@media (hover: hover) and (pointer: fine) {
-  .gallery-grid figure {
-    flex-grow: 1;
-    transition: flex-grow 0.4s ease;
-  }
-  .gallery-grid figure:hover {
-    flex-grow: 5;
-  }
-}
-
-/* Touch devices: tap to expand instead (radio group, only one open at a time). Degrades safely
-   to the plain static row on any browser without :has() support. */
-@media (hover: none) {
-  .gallery-grid figure {
-    flex-grow: 1;
-    transition: flex-grow 0.35s ease;
-  }
-  .gallery-grid figure:has(input:checked) {
-    flex-grow: 5;
-  }
-}
+.lightbox-close:hover { background: rgba(255, 255, 255, 0.3); }
 
 .team-grid {
   display: grid;
@@ -217,6 +258,23 @@ a { color: var(--primary-dark); }
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 10px;
+}
+.avatar-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: repeating-linear-gradient(135deg, #eef1f1, #eef1f1 8px, #e4e8e8 8px, #e4e8e8 16px);
+  border: 1px dashed var(--border);
+}
+.avatar-placeholder span {
+  font-size: 0.68rem;
+  color: var(--muted);
+  text-align: center;
+  padding: 0 10px;
 }
 .team-member h4 { margin-bottom: 2px; font-size: 1rem; }
 .team-member p { margin: 0; color: var(--muted); font-size: 0.9rem; }
@@ -287,6 +345,7 @@ a { color: var(--primary-dark); }
 .contact-list strong { display: block; font-size: 0.85rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.03em; }
 .contact-list a { font-size: 1.05rem; text-decoration: none; }
 .contact-list a:hover { text-decoration: underline; }
+.contact-list .value { display: inline-block; font-size: 1.05rem; }
 
 .map-embed { border-radius: var(--radius); overflow: hidden; }
 
@@ -299,9 +358,66 @@ a { color: var(--primary-dark); }
   font-size: 0.9rem;
 }
 .site-footer a { color: #ccc; }
+.footer-legal-link {
+  color: #ccc;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+/* Legal modal (footer link only, kept out of the main page flow) */
+.modal-toggle { display: none; }
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.modal-toggle:checked ~ .modal {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.modal-backdrop { position: absolute; inset: 0; cursor: pointer; }
+.modal-content {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  border-radius: var(--radius);
+  max-width: 700px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 32px;
+}
+.modal-content h2 { margin-bottom: 1rem; }
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--bg-alt);
+  color: var(--text);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.modal-close:hover { background: var(--border); }
 
 @media (max-width: 800px) {
-  .two-col, .contact-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
   .hero h1 { font-size: 1.9rem; }
-  .case-list { columns: 1; }
 }

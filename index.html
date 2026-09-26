@@ -11,15 +11,19 @@
 <body>
 
 <header class="site-header">
-  <div class="container header-inner">
-    <a href="#inicio" class="logo">
-      <img src="images/logo_small.png" alt="Clínica Dental Doctora Mariscal Fernández">
-    </a>
+  <div class="container">
+    <div class="header-top">
+      <a href="#inicio" class="logo">
+        <img src="images/logo_small.png" alt="Clínica Dental Doctora Mariscal Fernández">
+      </a>
+      <a href="#contacto" class="nav-cta">Contacto</a>
+    </div>
     <nav class="main-nav">
       <a href="#clinica">La Clínica</a>
       <a href="#equipo">Equipo</a>
       <a href="#tratamientos">Tratamientos</a>
-      <a href="#contacto" class="nav-cta">Contacto</a>
+      <a href="#casos">Casos Clínicos</a>
+      <a href="#empleo">¿Quieres trabajar con nosotros?</a>
     </nav>
   </div>
 </header>
@@ -40,21 +44,9 @@
 <section id="clinica" class="section">
   <div class="container">
     <h2>La Clínica</h2>
-    <div class="two-col">
-      <div>
-        <p>La Dra. Mariscal es una apasionada de la odontología. Terminó sus estudios en 2005 y, tras trabajar seis años en varias clínicas de Estepona y Sabinillas, abrió su propia consulta en Estepona en 2011.</p>
-        <p>Desde entonces trabajamos con un único objetivo: ser una clínica de referencia, mejorando la calidad del servicio odontológico con procesos eficientes para conservar la salud oral de nuestros pacientes.</p>
-        <p>Tratamos a los pacientes como nos gustaría que nos tratasen a nosotros: proponemos soluciones personalizadas tras estudiar cada caso, con pasión, honradez y empatía.</p>
-      </div>
-      <div class="info-card">
-        <h3>Horario</h3>
-        <ul class="schedule">
-          <li><span>Lunes a miércoles</span><span>9:30–13:30 y 16:00–20:00</span></li>
-          <li><span>Jueves</span><span>9:30–18:30</span></li>
-          <li><span>Viernes</span><span>9:30–14:00</span></li>
-        </ul>
-      </div>
-    </div>
+    <p>La Dra. Mariscal es una apasionada de la odontología. Terminó sus estudios en 2005 y, tras trabajar seis años en varias clínicas de Estepona y Sabinillas, abrió su propia consulta en Estepona en 2011.</p>
+    <p>Desde entonces trabajamos con un único objetivo: ser una clínica de referencia, mejorando la calidad del servicio odontológico con procesos eficientes para conservar la salud oral de nuestros pacientes.</p>
+    <p>Tratamos a los pacientes como nos gustaría que nos tratasen a nosotros: proponemos soluciones personalizadas tras estudiar cada caso, con pasión, honradez y empatía.</p>
 
     <h3 class="subheading">Razones para elegirnos</h3>
     <div class="cards">
@@ -73,27 +65,43 @@
     </div>
 
     <h3 class="subheading">Nuestras instalaciones</h3>
-    <div class="gallery-grid">
-      <figure>
-        <input type="radio" name="mobile-gallery" id="gal-1">
-        <label for="gal-1"><img src="images/portada-1.jpg" alt="Entrada"><figcaption>Entrada</figcaption></label>
+    <div class="gallery-wrapper">
+      <button type="button" class="gallery-arrow gallery-arrow-prev" aria-label="Anterior">&#8249;</button>
+      <div class="gallery-grid">
+      <figure class="gallery-item">
+        <input type="checkbox" id="gal-1" class="gallery-toggle">
+        <label for="gal-1" class="thumb"><img src="images/portada-3.jpg" alt="Gabinete Verde"></label>
+        <figcaption>Gabinete Verde</figcaption>
+        <div class="lightbox">
+          <label for="gal-1" class="lightbox-backdrop" aria-label="Cerrar"></label>
+          <img src="images/portada-3.jpg" alt="Gabinete Verde">
+          <label for="gal-1" class="lightbox-close" aria-label="Cerrar">&times;</label>
+        </div>
       </figure>
-      <figure>
-        <input type="radio" name="mobile-gallery" id="gal-2">
-        <label for="gal-2"><img src="images/portada-5.jpg" alt="Recepción"><figcaption>Recepción</figcaption></label>
+      <figure class="gallery-item">
+        <input type="checkbox" id="gal-2" class="gallery-toggle">
+        <label for="gal-2" class="thumb"><img src="images/portada-4.jpg" alt="Gabinete Azul"></label>
+        <figcaption>Gabinete Azul</figcaption>
+        <div class="lightbox">
+          <label for="gal-2" class="lightbox-backdrop" aria-label="Cerrar"></label>
+          <img src="images/portada-4.jpg" alt="Gabinete Azul">
+          <label for="gal-2" class="lightbox-close" aria-label="Cerrar">&times;</label>
+        </div>
       </figure>
-      <figure>
-        <input type="radio" name="mobile-gallery" id="gal-3">
-        <label for="gal-3"><img src="images/portada-2.jpg" alt="Sala de espera"><figcaption>Sala de espera</figcaption></label>
+      <figure class="gallery-item">
+        <div class="gallery-placeholder"><span>Foto pendiente</span></div>
+        <figcaption>Gabinete Aguamarina</figcaption>
       </figure>
-      <figure>
-        <input type="radio" name="mobile-gallery" id="gal-4">
-        <label for="gal-4"><img src="images/portada-3.jpg" alt="Gabinete Verde"><figcaption>Gabinete Verde</figcaption></label>
+      <figure class="gallery-item">
+        <div class="gallery-placeholder"><span>Foto pendiente</span></div>
+        <figcaption>Sala de radiología digital</figcaption>
       </figure>
-      <figure>
-        <input type="radio" name="mobile-gallery" id="gal-5">
-        <label for="gal-5"><img src="images/portada-4.jpg" alt="Gabinete Azul"><figcaption>Gabinete Azul</figcaption></label>
+      <figure class="gallery-item">
+        <div class="gallery-placeholder"><span>Foto pendiente</span></div>
+        <figcaption>Escaneado y fabricación</figcaption>
       </figure>
+      </div>
+      <button type="button" class="gallery-arrow gallery-arrow-next" aria-label="Siguiente">&#8250;</button>
     </div>
   </div>
 </section>
@@ -111,10 +119,14 @@
         <p>Directora médica · Ortodoncia, rehabilitación y estética dental</p>
       </div>
       <div class="team-member">
-        <img src="images/equipo-julia.jpg" alt="Julia Díaz Ariza">
-        <h4>Julia Díaz Ariza</h4>
-        <p>Odontología general y odontología infantil</p>
+        <div class="avatar-placeholder"><span>Foto pendiente</span></div>
+        <h4>Ana Sanchis Navarro</h4>
+        <p>Odontología general, cirugía y periodoncia</p>
       </div>
+    </div>
+
+    <h3 class="subheading">Colaboradores</h3>
+    <div class="team-grid">
       <div class="team-member">
         <img src="images/equipo-cristina.jpg" alt="Cristina Palou Mont">
         <h4>Cristina Palou Mont</h4>
@@ -130,29 +142,34 @@
     <h3 class="subheading">Atención al paciente</h3>
     <div class="team-grid">
       <div class="team-member">
-        <img src="images/equipo-paula.jpg" alt="Paula">
-        <h4>Paula</h4>
-        <p>Higienista</p>
-      </div>
-      <div class="team-member">
-        <img src="images/equipo-candy.jpg" alt="Candy">
+        <div class="avatar-placeholder"><span>Foto pendiente</span></div>
         <h4>Candy</h4>
-        <p>Auxiliar</p>
+        <p>Auxiliar y responsable del sistema CEREC</p>
       </div>
       <div class="team-member">
-        <img src="images/equipo-celeste.jpg" alt="Celeste">
-        <h4>Celeste</h4>
-        <p>Auxiliar</p>
+        <div class="avatar-placeholder"><span>Foto pendiente</span></div>
+        <h4>Eli</h4>
+        <p>Recepción</p>
       </div>
       <div class="team-member">
-        <img src="images/equipo-patricia.jpg" alt="Patricia">
+        <div class="avatar-placeholder"><span>Foto pendiente</span></div>
         <h4>Patricia</h4>
         <p>Coordinación y recepción</p>
       </div>
       <div class="team-member">
-        <img src="images/equipo-eli.jpg" alt="Eli">
-        <h4>Eli</h4>
-        <p>Recepción</p>
+        <div class="avatar-placeholder"><span>Foto pendiente</span></div>
+        <h4>Mari Ángeles</h4>
+        <p>Higienista y operadora del sistema CEREC</p>
+      </div>
+      <div class="team-member">
+        <div class="avatar-placeholder"><span>Foto pendiente</span></div>
+        <h4>Verónica</h4>
+        <p>Higienista</p>
+      </div>
+      <div class="team-member">
+        <div class="avatar-placeholder"><span>Foto pendiente</span></div>
+        <h4>Vero</h4>
+        <p>Higienista</p>
       </div>
     </div>
   </div>
@@ -294,6 +311,10 @@
       <div class="contact-info">
         <ul class="contact-list">
           <li>
+            <strong>Horario</strong>
+            <span class="value">Lunes a miércoles: 9:30–13:30 y 16:00–20:00<br>Jueves: 9:30–18:30<br>Viernes: 9:30–14:00</span>
+          </li>
+          <li>
             <strong>Dirección</strong>
             <a href="https://www.google.com/maps/search/?api=1&query=36.42329213381778,-5.158206676236626&query_place_id=0xd0cd6bb8edbe425:0xe23ec224ad62b775" target="_blank" rel="noopener">
               Avenida Puerta del Mar, Edificio Las Brisas nº46, bajo · 29680 Estepona (Málaga)
@@ -330,15 +351,63 @@
   </div>
 </section>
 
+<section id="empleo" class="section">
+  <div class="container">
+    <h2>¿Quieres trabajar con nosotros?</h2>
+    <p>Buscamos ampliar nuestro equipo con profesionales de la odontología, higienistas y odontólogos que compartan nuestra pasión por el trato cercano y el trabajo bien hecho. Si quieres formar parte de un equipo multidisciplinar en constante evolución, envíanos tu currículum — estaremos encantados de conocerte.</p>
+    <a href="mailto:clinicamariscalfernandez@gmail.com?subject=Candidatura%20-%20Cl%C3%ADnica%20Mariscal%20Fern%C3%A1ndez" class="btn btn-primary">Enviar currículum</a>
+  </div>
+</section>
+
 <footer class="site-footer">
   <div class="container">
     <p>&copy; <span id="year"></span> Clínica Dental Doctora Mariscal Fernández · Estepona, Málaga</p>
-    <a href="http://www.facebook.com/pages/Cl%C3%ADnica-Dental-Doctora-Mariscal-Fern%C3%A1ndez/154752344632683" target="_blank" rel="noopener">Facebook</a>
+    <label for="legal-modal" class="footer-legal-link">Aviso legal y cookies</label>
   </div>
 </footer>
 
+<input type="checkbox" id="legal-modal" class="modal-toggle">
+<div class="modal">
+  <label for="legal-modal" class="modal-backdrop" aria-label="Cerrar"></label>
+  <div class="modal-content">
+    <label for="legal-modal" class="modal-close" aria-label="Cerrar">&times;</label>
+    <h2>Aviso legal y protección de datos</h2>
+    <div class="accordion">
+      <details class="accordion-item">
+        <summary>Aviso legal</summary>
+        <div class="accordion-body">
+          <p>Este sitio web es propiedad de Clínica Dental de la Dra. Mª del Mar Mariscal Fernández, con domicilio en Avenida Puerta del Mar, Edificio Las Brisas nº46, bajo, 29680 Estepona (Málaga). <em>(Pendiente de completar con NIF/CIF y datos registrales exactos.)</em></p>
+        </div>
+      </details>
+      <details class="accordion-item">
+        <summary>Política de privacidad</summary>
+        <div class="accordion-body">
+          <p>De acuerdo con el Reglamento (UE) 2016/679 (RGPD) y la Ley Orgánica 3/2018 de Protección de Datos Personales y garantía de los derechos digitales (LOPDGDD), le informamos de que los datos personales que nos facilite (por ejemplo, al escribirnos por WhatsApp, teléfono o email) serán tratados por Clínica Dental Doctora Mariscal Fernández con la única finalidad de gestionar su solicitud o cita, y no se cederán a terceros salvo obligación legal.</p>
+          <p>Puede ejercer sus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a <a href="mailto:clinicamariscalfernandez@gmail.com">clinicamariscalfernandez@gmail.com</a>.</p>
+        </div>
+      </details>
+      <details class="accordion-item">
+        <summary>Política de cookies</summary>
+        <div class="accordion-body">
+          <p>Esta web no utiliza cookies propias de seguimiento ni analítica. El mapa incrustado de Google Maps en la sección de Contacto puede establecer sus propias cookies técnicas, gestionadas por Google conforme a su <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">política de privacidad</a>.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</div>
+
 <script>
 document.getElementById('year').textContent = new Date().getFullYear();
+
+document.querySelectorAll('.gallery-wrapper').forEach(function (wrapper) {
+  var track = wrapper.querySelector('.gallery-grid');
+  wrapper.querySelector('.gallery-arrow-prev').addEventListener('click', function () {
+    track.scrollBy({ left: -220, behavior: 'smooth' });
+  });
+  wrapper.querySelector('.gallery-arrow-next').addEventListener('click', function () {
+    track.scrollBy({ left: 220, behavior: 'smooth' });
+  });
+});
 </script>
 
 </body>
