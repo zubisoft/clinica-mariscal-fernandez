@@ -42,8 +42,9 @@ a { color: var(--primary-dark); }
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding: 10px 20px 0;
-  gap: 12px;
+  gap: 10px 12px;
 }
 .logo img { height: 40px; display: block; }
 .main-nav {
@@ -420,4 +421,8 @@ a { color: var(--primary-dark); }
 @media (max-width: 800px) {
   .contact-grid { grid-template-columns: 1fr; }
   .hero h1 { font-size: 1.9rem; }
+}
+
+@media (max-width: 360px) {
+  .logo img { height: 32px; }
 }
