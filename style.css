@@ -202,6 +202,8 @@ a { color: var(--primary-dark); }
 .lightbox {
   position: fixed;
   inset: 0;
+  height: 100vh;
+  height: 100dvh;
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -217,6 +219,13 @@ a { color: var(--primary-dark); }
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+}
+/* Lock page scroll while a lightbox/modal is open — avoids the well-known iOS Safari
+   glitch where fixed-position overlays can desync from the viewport during momentum
+   scrolling, since with scrolling locked there's nothing to desync from. */
+body:has(.gallery-toggle:checked),
+body:has(.modal-toggle:checked) {
+  overflow: hidden;
 }
 .lightbox-backdrop { position: absolute; inset: 0; cursor: zoom-out; }
 .lightbox-photo {
