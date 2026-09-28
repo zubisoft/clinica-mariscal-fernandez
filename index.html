@@ -401,6 +401,13 @@ document.querySelectorAll('.gallery-wrapper').forEach(function (wrapper) {
   });
 });
 
+// Some mobile browsers restore the previous scroll position on a fresh page load
+// (most noticeable after repeated reloads while testing), which looks like the header
+// and top menu are "skipped" since the page starts already scrolled past them. Force
+// a real fresh load to start at the very top when there's no #section in the URL.
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+if (!location.hash) window.scrollTo(0, 0);
+
 // Offset anchor scrolling by the sticky header's real height, so jumping to a section
 // doesn't hide its title/first line underneath the header. The header's height itself
 // varies (it can wrap onto 2-3 lines on narrow screens), so this is measured live
