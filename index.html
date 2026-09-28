@@ -346,7 +346,7 @@
 <section id="empleo" class="section">
   <div class="container">
     <h2>¿Quieres trabajar con nosotros?</h2>
-    <p>Buscamos ampliar nuestro equipo con profesionales de la odontología, higienistas y odontólogos que compartan nuestra pasión por el trato cercano y el trabajo bien hecho. Si quieres formar parte de un equipo multidisciplinar en constante evolución, envíanos tu currículum — estaremos encantados de conocerte.</p>
+    <p>Buscamos ampliar nuestro equipo con profesionales de la odontología, higienistas y odontólogos que compartan nuestra pasión por el trato cercano y el trabajo bien hecho. Si quieres formar parte de un equipo multidisciplinar en constante evolución, envíanos tu currículum, estaremos encantados de conocerte.</p>
     <a href="mailto:clinicamariscalfernandez@gmail.com?subject=Candidatura%20-%20Cl%C3%ADnica%20Mariscal%20Fern%C3%A1ndez" class="btn btn-primary">Enviar currículum</a>
   </div>
 </section>
@@ -366,7 +366,7 @@
       <details class="accordion-item">
         <summary>Aviso legal</summary>
         <div class="accordion-body">
-          <p>Este sitio web es propiedad de Clínica Dental de la Dra. Mª del Mar Mariscal Fernández, con domicilio en Avenida Puerta del Mar, Edificio Las Brisas nº46, bajo, 29680 Estepona (Málaga). <em>(Pendiente de completar con NIF/CIF y datos registrales exactos.)</em></p>
+          <p>Este sitio web es propiedad de MARISFER DENSELIT S.L.P. (CIF B01692565), titular de la Clínica Dental de la Dra. Mª del Mar Mariscal Fernández, con domicilio en Avenida Puerta del Mar, Edificio Las Brisas nº46, bajo, 29680 Estepona (Málaga).</p>
         </div>
       </details>
       <details class="accordion-item">
@@ -417,14 +417,45 @@ window.addEventListener('resize', updateScrollOffset);
 // iOS WebKit bug where a page-authored fixed overlay can desync during momentum scroll.
 var photoDialog = document.getElementById('photo-dialog');
 var photoDialogImg = document.getElementById('photo-dialog-img');
-document.querySelectorAll('.gallery-item .thumb').forEach(function (btn) {
+var galleryPhotos = Array.prototype.map.call(document.querySelectorAll('.gallery-item .thumb'), function (btn) {
+  return { full: btn.dataset.full, alt: btn.dataset.alt || '' };
+});
+var currentPhotoIndex = 0;
+function showPhoto(index) {
+  currentPhotoIndex = (index + galleryPhotos.length) % galleryPhotos.length;
+  var p = galleryPhotos[currentPhotoIndex];
+  photoDialogImg.src = p.full;
+  photoDialogImg.alt = p.alt;
+}
+document.querySelectorAll('.gallery-item .thumb').forEach(function (btn, i) {
   btn.addEventListener('click', function () {
-    photoDialogImg.src = btn.dataset.full;
-    photoDialogImg.alt = btn.dataset.alt || '';
+    showPhoto(i);
     photoDialog.showModal();
   });
 });
+
+// Swipe left/right while the photo is open moves to the next/previous one instead
+// of closing. A real swipe (moves past the threshold) is not treated as a tap-to-close.
+var photoTouchStartX = null;
+var photoSwiped = false;
+photoDialog.addEventListener('touchstart', function (e) {
+  photoTouchStartX = e.changedTouches[0].clientX;
+}, { passive: true });
+photoDialog.addEventListener('touchend', function (e) {
+  if (photoTouchStartX === null) return;
+  var dx = e.changedTouches[0].clientX - photoTouchStartX;
+  photoTouchStartX = null;
+  if (Math.abs(dx) > 40) {
+    photoSwiped = true;
+    showPhoto(currentPhotoIndex + (dx < 0 ? 1 : -1));
+  }
+});
+photoDialog.addEventListener('keydown', function (e) {
+  if (e.key === 'ArrowRight') showPhoto(currentPhotoIndex + 1);
+  if (e.key === 'ArrowLeft') showPhoto(currentPhotoIndex - 1);
+});
 photoDialog.addEventListener('click', function (e) {
+  if (photoSwiped) { photoSwiped = false; return; }
   if (e.target === photoDialog || e.target === photoDialogImg) photoDialog.close();
 });
 
