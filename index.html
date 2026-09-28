@@ -456,6 +456,10 @@ var photoDragDeltaX = 0;
 var photoSwiped = false;
 photoDialog.addEventListener('touchstart', function (e) {
   if (e.touches.length !== 1) return;
+  // Reset here rather than only when a click consumes it — some browsers don't
+  // synthesize a click after a touchmove that called preventDefault, which left
+  // this stuck "true" and silently swallowed the next tap-to-close attempt.
+  photoSwiped = false;
   photoDragStartX = e.touches[0].clientX;
   photoDragDeltaX = 0;
   photoDialogImg.style.transition = 'none';
