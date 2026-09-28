@@ -230,6 +230,11 @@ a { color: var(--primary-dark); }
   object-fit: contain;
   border-radius: 8px;
   cursor: zoom-out;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
 }
 
 .team-grid {
