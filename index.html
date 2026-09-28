@@ -69,23 +69,23 @@
       <button type="button" class="gallery-arrow gallery-arrow-prev" aria-label="Anterior">&#8249;</button>
       <div class="gallery-grid">
       <figure class="gallery-item">
-        <button type="button" class="thumb" data-full="images/portada-3.jpg" data-alt="Gabinete Verde"><img src="images/portada-3.jpg" alt="Gabinete Verde"></button>
+        <button type="button" class="thumb" data-full="images/carrusel/gabinete-verde.jpg" data-alt="Gabinete Verde"><img src="images/carrusel/gabinete-verde.jpg" alt="Gabinete Verde"></button>
         <figcaption>Gabinete Verde</figcaption>
       </figure>
       <figure class="gallery-item">
-        <button type="button" class="thumb" data-full="images/portada-4.jpg" data-alt="Gabinete Azul"><img src="images/portada-4.jpg" alt="Gabinete Azul"></button>
+        <button type="button" class="thumb" data-full="images/carrusel/gabinete-azul.jpg" data-alt="Gabinete Azul"><img src="images/carrusel/gabinete-azul.jpg" alt="Gabinete Azul"></button>
         <figcaption>Gabinete Azul</figcaption>
       </figure>
       <figure class="gallery-item">
-        <div class="gallery-placeholder"><span>Foto pendiente</span></div>
+        <button type="button" class="thumb" data-full="images/carrusel/gabinete-aguamarian.jpg" data-alt="Gabinete Aguamarina"><img src="images/carrusel/gabinete-aguamarian.jpg" alt="Gabinete Aguamarina"></button>
         <figcaption>Gabinete Aguamarina</figcaption>
       </figure>
       <figure class="gallery-item">
-        <div class="gallery-placeholder"><span>Foto pendiente</span></div>
+        <button type="button" class="thumb" data-full="images/carrusel/sala-radiologia-digital.jpg" data-alt="Sala de radiología digital"><img src="images/carrusel/sala-radiologia-digital.jpg" alt="Sala de radiología digital"></button>
         <figcaption>Sala de radiología digital</figcaption>
       </figure>
       <figure class="gallery-item">
-        <div class="gallery-placeholder"><span>Foto pendiente</span></div>
+        <button type="button" class="thumb" data-full="images/carrusel/escaneo-fabricacion.jpg" data-alt="Escaneado y fabricación"><img src="images/carrusel/escaneo-fabricacion.jpg" alt="Escaneado y fabricación"></button>
         <figcaption>Escaneado y fabricación</figcaption>
       </figure>
       </div>
@@ -106,12 +106,12 @@
     <h3 class="subheading">Equipo médico</h3>
     <div class="team-grid">
       <div class="team-member">
-        <img src="images/equipo-mariscal.jpg" alt="Mª del Mar Mariscal Fernández">
+        <img src="images/personal/equipo-mariscal.jpg" alt="Mª del Mar Mariscal Fernández">
         <h4>Mª del Mar Mariscal Fernández</h4>
         <p>Directora médica · Ortodoncia, rehabilitación y estética dental</p>
       </div>
       <div class="team-member">
-        <div class="avatar-placeholder"><span>Foto pendiente</span></div>
+        <img src="images/personal/equipo-ana.jpg" alt="Ana Sanchis Navarro">
         <h4>Ana Sanchis Navarro</h4>
         <p>Odontología general, cirugía y periodoncia</p>
       </div>
@@ -120,12 +120,12 @@
     <h3 class="subheading">Colaboradores</h3>
     <div class="team-grid">
       <div class="team-member">
-        <img src="images/equipo-cristina.jpg" alt="Cristina Palou Mont">
+        <img src="images/personal/equipo-cristina.jpg" alt="Cristina Palou Mont">
         <h4>Cristina Palou Mont</h4>
         <p>Endodoncia, rehabilitación y estética dental</p>
       </div>
       <div class="team-member">
-        <img src="images/equipo-jesus.jpg" alt="Jesús Alonso Fernández">
+        <img src="images/personal/equipo-jesus.jpg" alt="Jesús Alonso Fernández">
         <h4>Jesús Alonso Fernández</h4>
         <p>Cirugía e implantes</p>
       </div>
@@ -134,17 +134,17 @@
     <h3 class="subheading">Atención al paciente</h3>
     <div class="team-grid">
       <div class="team-member">
-        <div class="avatar-placeholder"><span>Foto pendiente</span></div>
+        <img src="images/personal/equipo-candy.jpg" alt="Candy">
         <h4>Candy</h4>
         <p>Auxiliar y responsable del sistema CEREC</p>
       </div>
       <div class="team-member">
-        <div class="avatar-placeholder"><span>Foto pendiente</span></div>
+        <img src="images/personal/equipo-eli.jpg" alt="Eli">
         <h4>Eli</h4>
         <p>Recepción</p>
       </div>
       <div class="team-member">
-        <div class="avatar-placeholder"><span>Foto pendiente</span></div>
+        <img src="images/personal/equipo-patricia.jpg" alt="Patricia">
         <h4>Patricia</h4>
         <p>Coordinación y recepción</p>
       </div>
@@ -159,7 +159,7 @@
         <p>Higienista</p>
       </div>
       <div class="team-member">
-        <div class="avatar-placeholder"><span>Foto pendiente</span></div>
+        <img src="images/personal/equipo-vero.jpg" alt="Vero">
         <h4>Vero</h4>
         <p>Higienista</p>
       </div>
@@ -400,6 +400,17 @@ document.querySelectorAll('.gallery-wrapper').forEach(function (wrapper) {
     track.scrollBy({ left: step, behavior: 'smooth' });
   });
 });
+
+// Offset anchor scrolling by the sticky header's real height, so jumping to a section
+// doesn't hide its title/first line underneath the header. The header's height itself
+// varies (it can wrap onto 2-3 lines on narrow screens), so this is measured live
+// instead of a fixed guess, and re-measured on resize.
+var siteHeader = document.querySelector('.site-header');
+function updateScrollOffset() {
+  document.documentElement.style.scrollPaddingTop = (siteHeader.offsetHeight + 10) + 'px';
+}
+updateScrollOffset();
+window.addEventListener('resize', updateScrollOffset);
 
 // Photo lightbox: native <dialog> instead of a hand-rolled position:fixed overlay.
 // The browser's own modal top-layer handles background scroll locking and avoids the
